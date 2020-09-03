@@ -11,7 +11,6 @@ class UserController extends VersionBaseController
 {
     public function getInfo(Request $request)
     {
-        encrypt($request->get('id'));
         $this->showError('字段验证失败');
     }
 }
