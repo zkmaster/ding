@@ -1,0 +1,137 @@
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+(new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
+    dirname(__DIR__)
+))->bootstrap();
+
+/*
+|--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| Here we will load the environment and create the application instance
+| that serves as the central piece of this framework. We'll use this
+| application as an "IoC" container and router for this framework.
+|
+*/
+
+$app = new Laravel\Lumen\Application(
+    dirname(__DIR__)
+);
+
+# 不建议使用Facades， 追踪代码不方便，需要非常熟悉各个类库
+// $app->withFacades();
+// $app->withEloquent();
+
+/*
+ |-------------------------------------------------------------------------
+ | Load configuration file
+ |-------------------------------------------------------------------------
+ |
+ | 加载basePath/config文件夹下的配置文件
+ | 这里的优先级最高
+ |
+ */
+$app->configure('app');
+$app->configure('api');
+
+
+/*
+|--------------------------------------------------------------------------
+| Register Container Bindings
+|--------------------------------------------------------------------------
+|
+| Now we will register a few bindings in the service container. We will
+| register the exception handler and the console kernel. You may add
+| your own bindings here if you like or you can make another file.
+| 绑定类实例到容器
+|
+*/
+
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    App\Exceptions\Handler::class
+);
+
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
+);
+
+/*
+|--------------------------------------------------------------------------
+| Register Middleware
+|--------------------------------------------------------------------------
+|
+| Next, we will register the middleware with the application. These can
+| be global middleware that run before and after each request into a
+| route or middleware that'll be assigned to some specific routes.
+|
+*/
+# 全局中间件
+// $app->middleware([
+//     App\Http\Middleware\ExampleMiddleware::class
+// ]);
+# 路由中间件
+// $app->routeMiddleware([
+//     'auth' => App\Http\Middleware\Authenticate::class,
+// ]);
+
+/*
+|--------------------------------------------------------------------------
+| Register Service Providers 注册服务
+|--------------------------------------------------------------------------
+|
+| Here we will register all of the application's service providers which
+| are used to bind services into the container. Service providers are
+| totally optional, so you are not required to uncomment this line.
+|
+*/
+# 注册 dingo 服务
+$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+# 注册事件服务
+ $app->register(App\Providers\EventServiceProvider::class);
+
+#认证服务
+//$app['Dingo\Api\Auth\Auth']->extend('oauth', function ($app) {
+//    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+//});
+#访问节流
+//$app['Dingo\Api\Http\RateLimit\Handler']->extend(function ($app) {
+//    return new Dingo\Api\Http\RateLimit\Throttle\Authenticated;
+//});
+
+
+/*
+|--------------------------------------------------------------------------
+| Load The Application Routes
+|--------------------------------------------------------------------------
+|
+| Next we will include the routes file so that they can all be added to
+| the application. This will provide all of the URLs the application
+| can respond to, as well as the controllers that may handle them.
+|
+*/
+
+# Lumen 路由
+//$app->router->group([
+//    'namespace' => 'App\Http\Controllers',
+//], function ($router) {
+//    require __DIR__.'/../routes/web.php';
+//});
+
+
+/**
+ * 创建一个 Dingo API 路由实例
+ * 从此输入输出交由dingo管理
+ *
+ * @var $route Dingo\Api\Routing\Router
+ */
+$route = app('Dingo\Api\Routing\Router');
+require(__DIR__.'/../routes/api.php');
+
+return $app;
