@@ -1,0 +1,16 @@
+[2020-08-21 09:45:48] local.ERROR: RuntimeException: Unable to boot ApiServiceProvider, configure an API domain or prefix. in /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/DingoServiceProvider.php:83
+Stack trace:
+#0 /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/DingoServiceProvider.php(47): Dingo\Api\Provider\DingoServiceProvider->registerConfig()
+#1 /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/LumenServiceProvider.php(94): Dingo\Api\Provider\DingoServiceProvider->register()
+#2 /Users/mac/Documents/Code/PHP/dingo/vendor/laravel/lumen-framework/src/Application.php(200): Dingo\Api\Provider\LumenServiceProvider->register()
+#3 /Users/mac/Documents/Code/PHP/dingo/bootstrap/app.php(91): Laravel\Lumen\Application->register(Object(Dingo\Api\Provider\LumenServiceProvider))
+#4 /Users/mac/Documents/Code/PHP/dingo/public/index.php(14): require('/Users/mac/Docu...')
+#5 {main} {"exception":"[object] (RuntimeException(code: 0): Unable to boot ApiServiceProvider, configure an API domain or prefix. at /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/DingoServiceProvider.php:83)
+[stacktrace]
+#0 /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/DingoServiceProvider.php(47): Dingo\\Api\\Provider\\DingoServiceProvider->registerConfig()
+#1 /Users/mac/Documents/Code/PHP/dingo/vendor/dingo/api/src/Provider/LumenServiceProvider.php(94): Dingo\\Api\\Provider\\DingoServiceProvider->register()
+#2 /Users/mac/Documents/Code/PHP/dingo/vendor/laravel/lumen-framework/src/Application.php(200): Dingo\\Api\\Provider\\LumenServiceProvider->register()
+#3 /Users/mac/Documents/Code/PHP/dingo/bootstrap/app.php(91): Laravel\\Lumen\\Application->register(Object(Dingo\\Api\\Provider\\LumenServiceProvider))
+#4 /Users/mac/Documents/Code/PHP/dingo/public/index.php(14): require('/Users/mac/Docu...')
+#5 {main}
+"} 

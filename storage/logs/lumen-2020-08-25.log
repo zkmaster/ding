@@ -1,0 +1,6 @@
+[2020-08-25 02:41:09] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Call to a member function run() on integer in /Users/mac/Documents/Code/PHP/dingo/public/index.php:31
+Stack trace:
+#0 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Call to a member function run() on integer at /Users/mac/Documents/Code/PHP/dingo/public/index.php:31)
+[stacktrace]
+#0 {main}
+"} 
